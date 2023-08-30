@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <!-- <link href="style.css" rel="stylesheet" /> -->
+  </head>
+  <style>
+    *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    height: 100vh;
+    display: grid;
+    place-items: center;
+    background-image: url('https://png.pngtree.com/thumb_back/fh260/background/20200714/pngtree-modern-double-color-futuristic-neon-background-image_351866.jpg');
+    background-size: cover;
+    height: 100vh;
+}
+h1{
+    color: black;
+    font-family:sans-serif;
+    text-transform: capitalize;
+    text-decoration: underline;
+    margin-bottom: 0px;
+}
+.main-container{
+    position: relative;
+    max-width: 300px;
+    width: 100%;
+    height: 350px;
+    border-radius: 12px;
+    background-color: rgb(255, 255, 255);
+    padding: 10px 20px 20px;
+}
+.mini-container{
+
+    background-color: rgb(209, 54, 223);
+    height: 250px;
+    border-radius: 9px;
+    padding: 20px;
+    display: grid;
+    grid-template-areas:'b1 b1 b1 b1'
+                        'b20 b18 b21 b2'
+                        'b6 b7 b8 b3'
+                        'b9 b10 b11 b4'
+                        'b12 b13 b14 b5'
+                        'b17 b15 b16 b19';
+    grid-gap: 5px;
+}
+.element-1{
+    height: 50px;
+    width: 100%;
+    margin-bottom: 10px;
+    font-size: 25px;
+    outline: none;
+    border: none;
+    text-align: right;
+    color: black;
+     
+}
+button{
+    padding: 12px 10px;
+    border-radius: 6px;
+    border: none;
+    font-size: 12px;
+    background-color: rgb(248, 248, 248);
+    color: black;
+    font-weight: bold;
+    cursor: pointer;
+}
+.mini-container button:active{
+    transform: scale(0.99);
+}
+#enter{
+    grid-area: b19;
+    background-color: rgb(15, 15, 15);
+    color: white;
+}
+#a1{
+    grid-area: b1;
+}
+#plus{
+    grid-area: b2;
+    color: #000000;
+    background-color: orange;
+}
+#minus{
+    grid-area: b3;
+    color: #000000;
+    background-color: orange;
+}
+#multiply{
+    grid-area: b4;
+    color: #000000;
+    background-color: orange;
+}
+#divide{
+    grid-area: b5;
+    color: #000000;
+    background-color: orange;
+}
+#a6{
+    grid-area: b6;
+}
+#a7{
+    grid-area: b7;
+}
+#a8{
+    grid-area: b8;
+}
+#a9{
+    grid-area: b9;
+}
+#a10{
+    grid-area: b10;
+}#a11{
+    grid-area: b11;
+}#a12{
+    grid-area: b12;
+}#a13{
+    grid-area: b13;
+}#a14{
+    grid-area: b14;
+}#a15{
+    grid-area: b15;
+}#a16{
+    grid-area: b16;
+}#clear{
+    grid-area: b17;
+    color: #2f9fff;
+}
+#cancel{
+    grid-area: b18;
+    color: #2f9fff;
+}
+/* #enter{ */
+    /* grid-area: b19; */
+    /* color: #000407; */
+/* } */
+#square-root{
+    grid-area: b20;
+    color: #2f9fff;
+}
+#square{
+    grid-area: b21;
+    color: #2f9fff;
+}
+  </style>
+  <body>
+     
+      <div class="main-container">
+        <input type="text" id="a1" class="element-1" placeholder="0"/>
+        <div class="mini-container">
+          <button value="1" class="button" id="a12">1</button>
+          <button value="2" class="button" id="a13">2</button>
+          <button value="3" class="button" id="a14">3</button>
+          <button value="4" class="button" id="a9">4</button>
+          <button value="5" class="button" id="a10">5</button>
+          <button value="6" class="button" id="a11">6</button>
+          <button value="7" class="button" id="a6">7</button>
+          <button value="8" class="button" id="a7">8</button>
+          <button value="9" class="button" id="a8">9</button>
+          <button value="0" class="button" id="a15">0</button>
+          <button value="." class="button" id="a16">.</button>
+          <button value="+" class="button" id="plus">+</button>
+          <button value="-" class="button" id="minus">-</button>
+          <button value="*" class="button" id="multiply">*</button>
+          <button value="/" class="button" id="divide">/</button>
+          <button class="button" id="square-root">√</button>
+          <button class="button" id="square">^</button>
+          <button id="enter">=</button>
+          <button id="clear">AC</button>
+          <button class="button" id="cancel">DEL</button>
+        </div>
+      </div>
+    <!-- <script src="script.js"></script> -->
+  </body>
+  <script>
+    let element = document.querySelector(".element-1");
+let plus = document.getElementById("plus");
+let minus = document.getElementById("minus");
+let multiply = document.getElementById("multiply");
+let divide = document.getElementById("divide");
+let enter = document.getElementById("enter");
+let clear = document.getElementById("clear");
+let cancel = document.getElementById("cancel");
+let squareRoot = document.getElementById("square-root");
+let square = document.getElementById("square");
+let buttonsContainer = document.querySelector(".mini-container");
+
+let has_dot = false;
+element.value = "";
+buttonsContainer.addEventListener("click", (e) => {
+  const clicked = e.target.closest(".button");
+  if (!clicked) return;
+
+  switch (clicked.value) {
+    case "+":
+    case "-":
+    case "*":
+    case "/":
+    case "^":
+    case "sroot":
+      has_dot = false;
+      element.value += clicked.value;
+      break;
+    case ".":
+      if (!has_dot && !element.value.endsWith(".")) {
+        element.value += clicked.value;
+        has_dot = true;
+      }
+      break;
+    default:
+      element.value += clicked.value;
+  }
+});
+
+enter.addEventListener("click", (e) => {
+  element.value = eval(element.value).toString();
+  has_dot = !element.value.endsWith(".") && element.value.includes(".");
+});
+
+cancel.addEventListener("click", (e) => {
+  element.value = element.value.slice(0, -1);
+  has_dot = !element.value.endsWith(".") && element.value.includes(".");
+});
+
+squareRoot.addEventListener("click", (e) => {
+  element.value = Math.sqrt(eval(element.value)).toString();
+  has_dot = !element.value.endsWith(".") && element.value.includes(".");
+});
+
+square.addEventListener("click", (e) => {
+  element.value = (eval(element.value) ** 2).toString();
+  has_dot = !element.value.endsWith(".") && element.value.includes(".");
+});
+
+clear.addEventListener("click", (e) => {
+  has_dot = false;
+  element.value = "";
+});
+
+  </script>
+</html>
